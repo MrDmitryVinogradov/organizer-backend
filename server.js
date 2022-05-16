@@ -104,7 +104,6 @@ router.post('/new', async (ctx) => {
 router.post('/addtofavs', async (ctx) => {
   const index = messages.findIndex(element => element.id == JSON.parse(ctx.request.body).id);
   messages[index].isFavorite = JSON.parse(ctx.request.body).isFavorite;
-  console.log(messages[index]);
   ctx.response.status = 200;
   ctx.response.body = 'ok';
 });
@@ -112,6 +111,7 @@ router.post('/addtofavs', async (ctx) => {
 
 router.post('/upload', async (ctx) => {
   const file = ctx.request.files;
+  console.log(file);
   messages.forEach((message) => {
     if (message.id === file.value.name) {
       message.path = file.value.path.replace('public/', '');
